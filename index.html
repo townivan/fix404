@@ -9,11 +9,6 @@
     <link href="http://fix404.com/site.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <style>
-    .hideme{
-        display:none;
-    }
-    </style>
   </head>
   <body>
     <h1>Welcome to fix404.com</h1>
@@ -24,33 +19,74 @@
     <input type="input" id="search" onchange="test()" />
 
 
-    <div id="q001" class="hideme">
+    <div id="q001" class="question404 hideme">
         <h2>What is the meaning of life?</h2>
+        <div class="tags hideme">life</div>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
     </div>
 
-    <div id="q002" class="hideme">
+    <div id="q002" class="question404 hideme">
         <h2>What is beauty?</h2>
+        <div class="tags hideme">life</div>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
     </div>
 
-    <div id="q003" class="hideme">
+    <div id="q003" class="question404 hideme">
         <h2>How do you know if you love someone?</h2>
+        <div class="tags hideme">life</div>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
     </div>
+
+    <div id="q004" class="question404 hideme">
+      <h2>What is the best recipe?</h2>
+      <div class="tags hideme">food</div>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
+  </div>
 
 
   </body>
 <script>
 
-var searchinput = document.getElementById('search').value;
+// Build up the JavaScript data structure by parsing the html!
 
-var list = [
-     {question: "What is the meaning of life", target: "q001"},
-     {question: "What is beauty", target: "q002"},
-     {question: "How do you know if you love someone", target: "q003"},
+    const qNodeList = document.querySelectorAll('.question404') // returns a Nodelist instead of an Array
+    //console.log(qNodeList)
+
+    // convert that Nodelist into an Array so we can use methods like map, etc.
+    let qArray = Array.from(qNodeList) 
+    console.log(qArray)
+
+    // REQUIRES ECMASCRIPT 2015+
+    var list = [];
+    //var qthing = {question:"a1",tags:"a2",idtarget:"a3"};
+    //for (let s on qArray) {
+      //for (var i = 0, len = qArray.length; i < len; i++) {
+      for (let i in qArray) {  
+        //console.log('s is ', s, qArray[s], qArray[s].childNodes[1].innerText, qArray[s].childNodes[3].innerText) 
+        let qthing = {question:"a1",tags:"a2",idtarget:"a3"};
+        qthing.question = qArray[i].childNodes[1].innerText;
+        qthing.tags = qArray[i].childNodes[3].innerText;
+        qthing.idtarget = qArray[i].id;  console.log('my id is: ', qArray[i].id)
+        list.push(qthing);
+      }
+
+console.log(list)
+
+// s is no longer defined here
+
+
+// the powa of the filter method on Arrays!
+//const filtered = qArray.filter(item => item.textContent.includes('*'))
+//console.log(filtered) // array with just guys with * in the text
+
+/*var list = [
+     {question: "What is the meaning of life", tags:"life", target: "q001"},
+     {question: "What is beauty", tags:"life", target: "q002"},
+     {question: "How do you know if you love someone", tags:"life", target: "q003"},
+     {question: "What is the best recipe", tags:"food", target: "q004"},
   ];  
-  
+*/
+
 var options = {
   shouldSort: true,
   threshold: 0.6,
@@ -58,18 +94,16 @@ var options = {
   distance: 100,
   maxPatternLength: 32,
   minMatchCharLength: 1,
-  keys: [
-    "question"
-  ]
+  keys: ["question", "tags"]
 };
 var fuse = new Fuse(list, options); // "list" is the item array
 
 function test(){
-    searchinput = document.getElementById('search').value;
+    var searchinput = document.getElementById('search').value;
     console.log("test triggered with searchinput=", searchinput)
   var result = fuse.search(searchinput);
-    console.log(result[0].target);
-    $('#'+result[0].target).toggleClass('hideme');
+    console.log(result[0].idtarget);
+    $('#'+result[0].idtarget).toggleClass('hideme');
 }  
 </script>
 </html>
