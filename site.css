@@ -1,6 +1,42 @@
+body{
+    font-size: 18px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.mainsearch{
+    font-size: 2rem;
+    padding: .5rem;
+}
+.part1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*background-color: pink;*/
+}
+.mylogo{
+    margin: 1rem;
+}
+
 .hideme{
     display:none;
 }
+
+.qbutton{
+    font-size: 2rem;
+    border: none;
+    background: none;
+    border-bottom: 1px dotted black;
+}
+.qbutton:active{
+    color: blue;
+    border-bottom: none;
+}
+.qbutton:focus{
+    color: green;
+    border-bottom: none;
+}
+
+
 
 blockquote{
   display:block;
