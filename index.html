@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>fix404</title>
     <link href="site.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js"></script>
   </head>
   <body>
     <h1>Welcome to fix404.com</h1>
@@ -13,4 +14,27 @@
     
     <p>I think I'll consider using http://fusejs.io/ as the main search interface.</p>
   </body>
+<script>
+var list = [
+     {question: "What is the meaning of life", target: "q001"},
+     {question: "What is beauty", target: "q002"},
+     {question: "How do you know if you love someone", target: "q003"},
+  ];  
+  
+var options = {
+  shouldSort: true,
+  threshold: 0.6,
+  location: 0,
+  distance: 100,
+  maxPatternLength: 32,
+  minMatchCharLength: 1,
+  keys: [
+    "title",
+    "author.firstName"
+]
+};
+var fuse = new Fuse(list, options); // "list" is the item array
+var result = fuse.search("");
+  
+</script>
 </html>
