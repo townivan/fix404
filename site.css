@@ -1,3 +1,7 @@
+.hideme{
+    display:none;
+}
+
 blockquote{
   display:block;
   background: #fff;
