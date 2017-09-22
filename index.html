@@ -6,41 +6,52 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>fix404</title>
     <link rel="shortcut icon" href=""><!-- removes error in console if you don't have a favicon -->
-    <link href="http://fix404.com/site.css" rel="stylesheet">
+    <link href="site.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
-    <h1>Welcome to fix404.com</h1>
-    <blockquote>"Page not found" or "I don't know"<div>&mdash; internet slang</div></blockquote>
-    
-    <p>I think I'll consider using http://fusejs.io/ as the main search interface.</p>
+    <!--<h1>Welcome to fix404.com</h1>-->
+    <section class="part1">
+      <img class="mylogo" src="404 logo2.svg" width="180">
+      <blockquote>"Page not found" or "I don't know"<div>&mdash; internet slang</div></blockquote>
+      <input type="input" id="search" class="mainsearch" oninput="test()" placeholder="Ask a question here..." />
+    </section>
 
-    <input type="input" id="search" onchange="test()" />
+    
 
 
     <div id="q001" class="question404 hideme">
-        <h2>What is the meaning of life?</h2>
+        <button type="button" class="qbutton">What is the meaning of life?</button>
         <div class="tags hideme">life</div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
+        <div class="404answer hideme animated">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
+        </div>
     </div>
 
     <div id="q002" class="question404 hideme">
-        <h2>What is beauty?</h2>
+      <button type="button" class="qbutton">What is beauty?</button>
         <div class="tags hideme">life</div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
+        <div class="404answer hideme animated">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
+        </div>
     </div>
 
     <div id="q003" class="question404 hideme">
-        <h2>How do you know if you love someone?</h2>
+        <button type="button" class="qbutton">How do you know if you love someone?</button>
         <div class="tags hideme">life</div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
+        <div class="404answer hideme animated">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
+        </div>
     </div>
 
     <div id="q004" class="question404 hideme">
-      <h2>What is the best recipe?</h2>
+      <button type="button" class="qbutton">What is the best recipe?</button>
       <div class="tags hideme">food</div>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
+      <div class="404answer hideme animated">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
+      </div>
   </div>
 
 
@@ -54,7 +65,7 @@
 
     // convert that Nodelist into an Array so we can use methods like map, etc.
     let qArray = Array.from(qNodeList) 
-    console.log(qArray)
+    //console.log(qArray)
 
     // REQUIRES ECMASCRIPT 2015+
     var list = [];
@@ -64,10 +75,16 @@
       for (let i in qArray) {  
         //console.log('s is ', s, qArray[s], qArray[s].childNodes[1].innerText, qArray[s].childNodes[3].innerText) 
         let qthing = {question:"a1",tags:"a2",idtarget:"a3"};
-        qthing.question = qArray[i].childNodes[1].innerText;
-        qthing.tags = qArray[i].childNodes[3].innerText;
-        qthing.idtarget = qArray[i].id;  console.log('my id is: ', qArray[i].id)
+        //qthing.question = qArray[i].childNodes[1].innerText;
+        //qthing.tags = qArray[i].childNodes[3].innerText;
+        //qthing.idtarget = qArray[i].id;  console.log('my id is: ', qArray[i].id)
+        qthing.question = qArray[i].getElementsByClassName("qbutton")[0].innerText;
+        qthing.tags = qArray[i].getElementsByClassName("tags")[0].innerText;
+        qthing.idtarget = qArray[i].id;  //console.log('my id is: ', qArray[i].id)
+
         list.push(qthing);
+
+        //console.log("?? ", qArray[i].getElementsByClassName("qtext")[0].innerText);
       }
 
 console.log(list)
@@ -87,23 +104,48 @@ console.log(list)
   ];  
 */
 
+// http://fusejs.io/
+
 var options = {
   shouldSort: true,
+  tokenize: true,
   threshold: 0.6,
   location: 0,
   distance: 100,
   maxPatternLength: 32,
-  minMatchCharLength: 1,
+  minMatchCharLength: 3, // min 3 chars
   keys: ["question", "tags"]
 };
 var fuse = new Fuse(list, options); // "list" is the item array
 
 function test(){
     var searchinput = document.getElementById('search').value;
-    console.log("test triggered with searchinput=", searchinput)
-  var result = fuse.search(searchinput);
-    console.log(result[0].idtarget);
-    $('#'+result[0].idtarget).toggleClass('hideme');
+
+    // hide all previously displayed answers
+    var allquestions = document.getElementsByClassName("question404")
+    $(allquestions).addClass("hideme")
+
+    if (searchinput.length > 1){
+
+      //console.log("test triggered with searchinput=", searchinput)
+      var result = fuse.search(searchinput);
+      //console.log ("result obj length is ", result.length)
+      //console.log(result[0].idtarget);
+
+      
+
+
+      // display results
+      for (let i in result) {
+        $('#'+result[i].idtarget).toggleClass('hideme');
+      }
+
+    }
 }  
+
+$('.qbutton').click(function(){
+  $(this).siblings('.404answer').slideToggle();
+});
+
 </script>
 </html>
