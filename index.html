@@ -29,9 +29,8 @@ var options = {
   maxPatternLength: 32,
   minMatchCharLength: 1,
   keys: [
-    "title",
-    "author.firstName"
-]
+    "question"
+  ]
 };
 var fuse = new Fuse(list, options); // "list" is the item array
 var result = fuse.search("");
