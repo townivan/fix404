@@ -2,6 +2,7 @@ body{
     font-size: 18px;
     max-width: 900px;
     margin: 0 auto;
+    padding: .4rem;
 }
 .mainsearch{
     font-size: 2rem;
@@ -22,12 +23,18 @@ body{
 }
 .question404{
     margin: 2rem 0;
+    padding: 0.1px;
+}
+.tags{
+    display: none;
 }
 .qbutton{
     font-size: 2rem;
     border: none;
     background: none;
     color: cornflowerblue;
+    padding-left: 0;
+    padding-right: 0;
     /*border-bottom: 1px dotted black;*/
 }
 .qbutton:hover{
@@ -42,7 +49,9 @@ body{
     color: green;
     border-bottom: none;
 }
-
+.answer404{
+    font-size: 1.4rem;
+}
 
 
 blockquote{
