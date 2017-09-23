@@ -7,7 +7,7 @@
     <title>fix404</title>
     <link rel="shortcut icon" href=""><!-- removes error in console if you don't have a favicon -->
     <link href="site.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
@@ -24,32 +24,32 @@
 
     <div id="q001" class="question404 hideme">
         <button type="button" class="qbutton">What is the meaning of life?</button>
-        <div class="tags hideme">life</div>
-        <div class="404answer hideme animated">
+        <div class="tags">life</div>
+        <div class="answer404 hideme animated">
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
         </div>
     </div>
 
     <div id="q002" class="question404 hideme">
       <button type="button" class="qbutton">What is beauty?</button>
-        <div class="tags hideme">life</div>
-        <div class="404answer hideme animated">
+        <div class="tags">life</div>
+        <div class="answer404 hideme animated">
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
         </div>
     </div>
 
     <div id="q003" class="question404 hideme">
         <button type="button" class="qbutton">How do you know if you love someone?</button>
-        <div class="tags hideme">life</div>
-        <div class="404answer hideme animated">
+        <div class="tags">life</div>
+        <div class="answer404 hideme animated">
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
         </div>
     </div>
 
     <div id="q004" class="question404 hideme">
       <button type="button" class="qbutton">What is the best recipe?</button>
-      <div class="tags hideme">food</div>
-      <div class="404answer hideme animated">
+      <div class="tags">food</div>
+      <div class="answer404 hideme animated">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, officia.</p>
       </div>
   </div>
@@ -75,6 +75,7 @@
       for (let i in qArray) {  
         //console.log('s is ', s, qArray[s], qArray[s].childNodes[1].innerText, qArray[s].childNodes[3].innerText) 
         let qthing = {question:"a1",tags:"a2",idtarget:"a3"};
+        //let qthing = {question:"a1",tags:"a2"};
         //qthing.question = qArray[i].childNodes[1].innerText;
         //qthing.tags = qArray[i].childNodes[3].innerText;
         //qthing.idtarget = qArray[i].id;  console.log('my id is: ', qArray[i].id)
@@ -144,7 +145,7 @@ function test(){
 }  
 
 $('.qbutton').click(function(){
-  $(this).siblings('.404answer').slideToggle();
+  $(this).siblings('.answer404').slideToggle();
 });
 
 </script>
